@@ -1,7 +1,12 @@
 package demo.controller;
 
+import demo.dao.DishDao;
+import demo.dto.CategoryDto;
+import demo.dto.CategoryIdDto;
 import demo.model.Category;
 import demo.service.CategoryService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -24,9 +29,20 @@ public class CategoryController {
     }
 
     @GetMapping("/{id}")
-    public Category getById(@PathVariable("id") int id){
+    public ResponseEntity<Category> getById(@PathVariable("id") int id){
         Category category = categoryService.getById(id);
-        return category;
+        if (category != null){
+            return new ResponseEntity<Category>(category, HttpStatus.OK);
+        }else {
+            return new ResponseEntity<Category>(category, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PostMapping("/create")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Category create(@RequestBody CategoryDto request){
+        Category categoryCreate = new Category(0, request.getName());
+        return categoryService.create(categoryCreate);
     }
 
     @PutMapping("/update")
@@ -35,14 +51,25 @@ public class CategoryController {
         return categoryUpdete;
     }
 
-    @PostMapping("/create")
-    public Category create(@RequestBody Category category){
-        Category categoryCreate = categoryService.create(category);
-        return categoryCreate;
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Boolean> deleteById(@PathVariable("id") int id){
+        boolean isDelete = categoryService.deleteById(id);
+        if (isDelete){
+            return new ResponseEntity<Boolean>(isDelete, HttpStatus.NON_AUTHORITATIVE_INFORMATION);
+        } else {
+            return new ResponseEntity<Boolean>(isDelete, HttpStatus.NOT_FOUND);
+        }
     }
 
-    @DeleteMapping("/delete/{id}")
-    public void deleteById(@PathVariable("id") int id){
-        categoryService.deleteById(id);
+    @PutMapping("/add")
+    public Category addDishCategory(@RequestParam int categoryId) {
+        Category category = categoryService.addDishCategory(categoryId);
+        return category;
+    }
+
+    @GetMapping("/key")
+    public List<Category> getkeywords() {
+        List<Category> keyList = categoryService.getkeywords();
+        return keyList;
     }
 }

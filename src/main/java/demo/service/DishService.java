@@ -15,5 +15,9 @@ public interface DishService {
 
     Dish update(Dish dish);
 
-    void deleteById(int id);
+    boolean deleteById(int id);
+
+    void deleteByCategoryId(int id);
+
+    List<Dish> getByCategoryId(int categoryId);
 }

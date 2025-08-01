@@ -1,5 +1,6 @@
 package demo.dao;
 
+import demo.dto.CategoryDishFilter;
 import demo.model.Category;
 
 import java.util.List;
@@ -11,12 +12,17 @@ public interface CategoryDao {
 
     Category findById(int id);//в сервисе сделать: если данные не найдем отдаем ошибку not found Exception 404 ошибка
 
-    Category update(Category category);// незабываем про валидацию
+    Category update(Category category);
 
     Category create(Category category);//обязательно добавить блюда и статус код (201), незабываем про валидацию
 
-    void deleteById(int id);//вернуть статус 203 если удалит, если не найдет not found Exception 404 ошибка
+    boolean deleteById(int id);//вернуть статус 203 если удалит, если не найдет not found Exception 404 ошибка
 
+    Category addDishCategory(int categoryId);
+
+    List<Category> findkeywords();
+
+    CategoryDishFilter findkeywordsById(int categoryId);
 }
 
 /**
@@ -76,5 +82,14 @@ public interface CategoryDao {
  *
  *
  *
- * есть идея создать метод на получение всех блюд, и спользовать его для заполнения списков блюд в категориях!!!!
+ * создать отдельный класс, для валидации имен, + сделать метод для получения этих значений, возможно в категорию нужно добавить
+ * эти значения что бы объект содержал, но попробовать нужно внячале сравнение с значениями
+ *
+ *
+ *
+ *
+ * Выучить понятия анонимного класса посмотреть
+ * разобрать функциональные интерфейсы
+ * лямбда
+ * стримы
  */
