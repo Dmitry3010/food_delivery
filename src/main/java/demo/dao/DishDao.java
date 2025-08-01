@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface DishDao {
 
-    List<Dish> findAll();//работает
+    List<Dish> findAll();
 
     Dish create(Dish dish);
 
@@ -15,5 +15,9 @@ public interface DishDao {
 
     Dish update(Dish dish);
 
-    void deleteById(int id);//не работает
+    boolean deleteById(int id);
+
+    void deleteByCategoryId(int id);
+
+    List<Dish> findByCategoryId(int categoryId);
 }
