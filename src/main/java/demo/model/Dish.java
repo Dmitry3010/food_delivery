@@ -11,14 +11,14 @@ public class Dish {
     private String name;
     private String description;
     private int price;
-    private Category category;
+    private int idCategory;
 
-    public Dish(int id, String name, String description, int price, Category category) {
+    public Dish(int id, String name, String description, int price, int idCategory) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
-        this.category = category;
+        this.idCategory = idCategory;
     }
 
     public Dish(int id, String name, String description, int price) {
@@ -28,10 +28,10 @@ public class Dish {
         this.price = price;
     }
 
-    public Dish(int id, String name, Category category) {
+    public Dish(int id, String name, int idCategory) {
         this.id = id;
         this.name = name;
-        this.category = category;
+        this.idCategory = idCategory;
     }
 
     public Dish(int id, String name) {
@@ -39,9 +39,16 @@ public class Dish {
         this.name = name;
     }
 
-    public Dish(String name, Category category) {
+    public Dish() {
+    }
+
+    public Dish(int idCategory) {
+        this.idCategory = idCategory;
+    }
+
+    public Dish(String name, int idCategory) {
         this.name = name;
-        this.category = category;
+        this.idCategory = idCategory;
     }
 
     public Dish(String name) {
@@ -81,13 +88,12 @@ public class Dish {
         this.price = price;
     }
 
-    public Category getCategory() {
-        return category;
+    public int getIdCategory() {
+        return idCategory;
     }
 
-    public Category setCategory(Category category) {
-        this.category = category;
-        return category;
+    public void setIdCategory(int idCategory) {
+        this.idCategory = idCategory;
     }
 
     @Override
